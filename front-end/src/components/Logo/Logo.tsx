@@ -1,9 +1,10 @@
 import logo from "../Logo/assets/logo1.jpeg";
+import styles from "./Logo.module.scss";
 
-const Logo = () => {
+const Logo: React.FC = () => {
   return (
     <>
-      <img src={logo} alt="logo" />
+      <img className={styles.logo} src={logo} alt="logo" />
     </>
   );
 };

@@ -1,0 +1,9 @@
+.logo {
+  width: 10rem;
+  height: 10rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
