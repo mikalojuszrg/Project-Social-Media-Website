@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+
+  &__info {
+    width: 50%;
+  }
+
+  &__visual {
+    width: 50%;
+
+    img {
+      width: 65%;
+
+      //   object-fit: contain;
+      border-radius: 8rem;
+    }
+  }
+}
