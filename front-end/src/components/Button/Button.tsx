@@ -7,7 +7,8 @@ const cn = classNames.bind(styles);
 
 interface props {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
+  type?: string;
   variant: string;
 }
 
