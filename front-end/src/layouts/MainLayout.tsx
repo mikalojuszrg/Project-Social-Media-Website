@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styles from "./MainLayout.module.scss";
 
-interface props {
+export interface props {
   children: ReactNode;
 }
 
