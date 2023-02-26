@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Header from "../components/Header/Header";
 import styles from "./MainLayout.module.scss";
 
 export interface props {
@@ -8,6 +9,7 @@ export interface props {
 const MainLayout: React.FC<props> = ({ children }) => {
   return (
     <div className={styles.container}>
+      <Header />
       {children}
       <footer className={styles.container__footer}>
         Created by Mikalojus Žirgulis
