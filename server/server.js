@@ -38,16 +38,31 @@ app.get("/users", async (req, res) => {
 
 app.post("/users", async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = { name: req.body.name, password: hashedPassword };
+    const email = req.body.email;
     const con = await client.connect();
+    const user = await con
+      .db("social_media")
+      .collection("users")
+      .findOne({ email });
+    if (user) {
+      await con.close();
+      return res.status(409).json({ message: "Email already exists" });
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email,
+      password: hashedPassword,
+    };
     const data = await con
       .db("social_media")
       .collection("users")
-      .insertOne(user);
+      .insertOne(newUser);
     await con.close();
     res.send(data);
-  } catch {
+  } catch (err) {
+    console.error(err);
     res.status(500).send();
   }
 });
@@ -58,7 +73,7 @@ app.post("/user/login", async (req, res) => {
     const user = await con
       .db("social_media")
       .collection("users")
-      .findOne({ name: req.body.name });
+      .findOne({ email: req.body.email });
     await con.close();
     if (user === null) {
       return res.status(400).send("Cannot find user");
