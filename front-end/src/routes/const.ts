@@ -12,14 +12,17 @@ export const mainRoutes: MainRoutesType = {
   Layout: MainLayout,
   routes: [
     {
+      title: "Home",
       path: HOME_PATH,
       Component: Home,
     },
     {
+      title: "Registration",
       path: REGISTER_PATH,
       Component: Register,
     },
     {
+      title: "Feed",
       path: FEED_PATH,
       Component: Feed,
     },

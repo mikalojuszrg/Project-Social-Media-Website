@@ -1,6 +1,7 @@
 import { props } from "../layouts/MainLayout";
 
 type RouteType = {
+  title: string;
   path: string;
   Component: React.FC;
 };
