@@ -1,3 +1,5 @@
+import styles from "./Input.module.scss";
+
 export interface Props {
   type: string;
   name: string;
@@ -5,7 +7,7 @@ export interface Props {
 }
 
 const Input = (props: Props) => {
-  return <input maxLength={24} {...props} />;
+  return <input className={styles.input} maxLength={24} {...props} />;
 };
 
 export default Input;
