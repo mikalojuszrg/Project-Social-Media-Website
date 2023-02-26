@@ -1,10 +1,14 @@
 import logo from "../Logo/assets/logoo.jpg";
 import styles from "./Logo.module.scss";
 
-const Logo: React.FC = () => {
+interface Props {
+  onClick: () => void;
+}
+
+const Logo: React.FC<Props> = ({ onClick }) => {
   return (
     <>
-      <img className={styles.logo} src={logo} alt="logo" />
+      <img onClick={onClick} className={styles.logo} src={logo} alt="logo" />
     </>
   );
 };
