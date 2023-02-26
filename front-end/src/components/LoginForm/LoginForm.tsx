@@ -1,7 +1,9 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useLoginUser } from "../../hooks/user";
 import Button from "../Button/Button";
 import FormikInput from "../FormikInput/FormikInput";
+import styles from "./LoginForm.module.scss";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -14,12 +16,13 @@ interface Login {
 }
 
 const LoginForm = () => {
+  const { mutateAsync: loginUser } = useLoginUser();
   const handleSubmit = (values: Login) => {
-    console.log(values);
+    loginUser(values);
   };
 
   return (
-    <div>
+    <div className={styles.form}>
       <Formik
         initialValues={{
           email: "",
