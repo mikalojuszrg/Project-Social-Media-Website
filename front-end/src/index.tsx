@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import { UserProvider } from "./contexts/UserContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,12 +16,14 @@ const queryClient = new QueryClient();
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        <Toaster />
-      </QueryClientProvider>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <App />
+          <Toaster />
+        </QueryClientProvider>
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>
 );
 
