@@ -1,6 +1,11 @@
 import { Formik, Form } from "formik";
+import { useContext } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { UserContext } from "../../contexts/UserContext";
 import { useLoginUser } from "../../hooks/user";
+import { FEED_PATH } from "../../routes/const";
 import Button from "../Button/Button";
 import FormikInput from "../FormikInput/FormikInput";
 import styles from "./LoginForm.module.scss";
@@ -16,9 +21,18 @@ interface Login {
 }
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const { mutateAsync: loginUser } = useLoginUser();
   const handleSubmit = (values: Login) => {
-    loginUser(values);
+    loginUser(values)
+      .then((response) => {
+        console.log(response);
+        setUser(response); // Update the user object here
+        navigate(FEED_PATH);
+        toast.success("Login successful");
+      })
+      .catch(() => toast.error("You've entered wrong details"));
   };
 
   return (
