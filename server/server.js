@@ -17,10 +17,6 @@ const client = new MongoClient(uri);
 
 app.use(cors());
 
-// app.get("/users", (req, res) => {
-//   res.json({ users: ["userOne", "userTwo", "userThree"] });
-// });
-
 app.get("/users", async (req, res) => {
   try {
     const con = await client.connect();
@@ -79,7 +75,7 @@ app.post("/user/login", async (req, res) => {
       return res.status(400).send("Cannot find user");
     }
     if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send("Success");
+      res.send(user);
     } else {
       res.send("Not Allowed");
     }
