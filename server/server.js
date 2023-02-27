@@ -85,6 +85,23 @@ app.post("/user/login", async (req, res) => {
   }
 });
 
+app.post("/posts", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("social_media")
+      .collection("posts")
+      .insertOne(req.body);
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    res.status(500).send({
+      message: "An error occurred while processing your request",
+      error,
+    });
+  }
+});
+
 app.listen(5000, () => {
   console.log("Servers started on port 5000");
 });
