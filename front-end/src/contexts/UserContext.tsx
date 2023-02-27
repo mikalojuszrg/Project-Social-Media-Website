@@ -2,7 +2,7 @@ import { createContext, useState, ReactNode } from "react";
 import { User } from "../types/user";
 
 type UserContextType = {
-  user: User | null; // Allow the user to be null initially
+  user: User | null;
   setUser: (user: User | null) => void;
 };
 
