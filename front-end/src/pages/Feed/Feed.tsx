@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import PostForm from "../../components/PostForm/PostForm";
+import TimeLine from "../../components/Timeline/TimeLine";
 import { UserContext } from "../../contexts/UserContext";
-import { usePosts } from "../../hooks/posts";
 import { HOME_PATH } from "../../routes/const";
 
 const Feed = () => {
@@ -10,15 +10,15 @@ const Feed = () => {
   const { user } = useContext(UserContext);
   const { first_name, last_name } = user ?? {};
 
-  const { data } = usePosts();
-  const posts = data || [];
+  user === null && navigate(HOME_PATH);
 
-  !user && navigate(HOME_PATH);
+  console.log(user);
 
   return (
     <div>
       {first_name} {last_name}
       <PostForm />
+      <TimeLine />
     </div>
   );
 };
