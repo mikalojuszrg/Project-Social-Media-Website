@@ -102,6 +102,21 @@ app.post("/posts", async (req, res) => {
   }
 });
 
+app.get("/posts", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("social_media")
+      .collection("posts")
+      .find()
+      .toArray();
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 app.listen(5000, () => {
   console.log("Servers started on port 5000");
 });
