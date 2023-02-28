@@ -2,22 +2,27 @@ import { Formik, Form, Field } from "formik";
 import { FormikHelpers } from "formik";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { useCreatePost } from "../../hooks/posts";
+import { useCreatePost, usePosts } from "../../hooks/posts";
 import { NewPost } from "../../types/posts";
-import { dateNow } from "../../utils/getDate";
 import Button from "../Button/Button";
+import styles from "./PostForm.module.scss";
 
 const PostForm = () => {
   const { user } = useContext(UserContext);
   const { first_name = "", last_name = "" } = user ?? {};
   const { mutateAsync: createPost } = useCreatePost();
+  const { refetch } = usePosts();
 
   const handleSubmit = (
     values: NewPost,
     { resetForm }: FormikHelpers<NewPost>
   ) => {
-    createPost(values);
+    createPost({
+      ...values,
+      date: new Date().toString(),
+    });
     resetForm();
+    refetch();
   };
 
   return (
@@ -27,15 +32,17 @@ const PostForm = () => {
           content: "",
           first_name: first_name,
           last_name: last_name,
-          date: dateNow,
+          date: "",
         }}
         onSubmit={handleSubmit}
       >
         {() => (
-          <Form>
+          <Form className={styles.form}>
             <Field
+              className={styles.form__textarea}
               name="content"
               placeholder="Share what's new in your life!"
+              component="textarea"
             />
             <Button variant="primary" type="submit">
               SHARE
