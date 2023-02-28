@@ -1,16 +1,23 @@
 import { Formik, Form, Field } from "formik";
+import { FormikHelpers } from "formik";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useCreatePost } from "../../hooks/posts";
-import { Post } from "../../types/posts";
+import { NewPost } from "../../types/posts";
+import { dateNow } from "../../utils/getDate";
 import Button from "../Button/Button";
 
 const PostForm = () => {
   const { user } = useContext(UserContext);
   const { first_name = "", last_name = "" } = user ?? {};
   const { mutateAsync: createPost } = useCreatePost();
-  const handleSubmit = (values: Post) => {
+
+  const handleSubmit = (
+    values: NewPost,
+    { resetForm }: FormikHelpers<NewPost>
+  ) => {
     createPost(values);
+    resetForm();
   };
 
   return (
@@ -20,6 +27,7 @@ const PostForm = () => {
           content: "",
           first_name: first_name,
           last_name: last_name,
+          date: dateNow,
         }}
         onSubmit={handleSubmit}
       >
