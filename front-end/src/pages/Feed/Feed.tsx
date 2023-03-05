@@ -1,25 +1,28 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+
+import { HOME_PATH } from "../../routes/const";
 import PostForm from "../../components/PostForm/PostForm";
 import TimeLine from "../../components/Timeline/TimeLine";
 import { UserContext } from "../../contexts/UserContext";
-import { HOME_PATH } from "../../routes/const";
+import styles from "./Feed.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const { first_name, last_name } = user ?? {};
 
-  user === null && navigate(HOME_PATH);
-
-  console.log(user);
+  useEffect(() => {
+    if (user === null) {
+      return navigate(HOME_PATH);
+    }
+  }, [user, navigate]);
 
   return (
-    <div>
-      {first_name} {last_name}
+    <main className={styles.container}>
       <PostForm />
       <TimeLine />
-    </div>
+    </main>
   );
 };
 
