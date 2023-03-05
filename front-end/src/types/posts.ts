@@ -3,7 +3,7 @@ export type Post = {
   first_name: string;
   last_name: string;
   date: string;
-  _id: string;
+  _id: unknown;
 };
 
 export type NewPost = Omit<Post, "_id">;
