@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
+import { buttonClassNames } from "../../consts/buttonClassNames";
 import classNames from "classnames";
 import styles from "./Button.module.scss";
-import { buttonClassNames } from "../../consts/buttonClassNames";
 
 const cn = classNames.bind(styles);
 
@@ -10,6 +10,7 @@ interface props {
   onClick?: () => void;
   type?: string;
   variant: string;
+  disabled?: boolean;
 }
 
 const Button: React.FC<props> = ({ children, variant, onClick }) => {
