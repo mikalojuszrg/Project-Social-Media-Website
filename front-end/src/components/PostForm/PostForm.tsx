@@ -1,28 +1,32 @@
-import { Formik, Form, Field } from "formik";
-import { FormikHelpers } from "formik";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { Field, Form, Formik } from "formik";
+import { useContext, useState } from "react";
 import { useCreatePost, usePosts } from "../../hooks/posts";
-import { NewPost } from "../../types/posts";
+
 import Button from "../Button/Button";
+import { FormikHelpers } from "formik";
+import { NewPost } from "../../types/posts";
+import { UserContext } from "../../contexts/UserContext";
 import styles from "./PostForm.module.scss";
 
 const PostForm = () => {
   const { user } = useContext(UserContext);
   const { first_name = "", last_name = "" } = user ?? {};
   const { mutateAsync: createPost } = useCreatePost();
-  const { refetch } = usePosts();
+  const { refetch, isLoading } = usePosts();
+  const [isFetching, setIsFetching] = useState(false);
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: NewPost,
     { resetForm }: FormikHelpers<NewPost>
   ) => {
-    createPost({
+    setIsFetching(true);
+    await createPost({
       ...values,
       date: new Date().toString(),
     });
     resetForm();
-    refetch();
+    await refetch();
+    setIsFetching(false);
   };
 
   return (
@@ -44,8 +48,12 @@ const PostForm = () => {
               placeholder="Share what's new in your life!"
               component="textarea"
             />
-            <Button variant="primary" type="submit">
-              SHARE
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isLoading || isFetching}
+            >
+              {isFetching ? "Sharing..." : "SHARE"}
             </Button>
           </Form>
         )}
