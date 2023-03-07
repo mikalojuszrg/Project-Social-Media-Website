@@ -1,5 +1,6 @@
 import Loader from "../Loader/Loader";
 import { Post } from "../../types/posts";
+import PostCard from "../Post/PostCard";
 import { reverseArray } from "../../utils/reverseArray";
 import styles from "./Timeline.module.scss";
 import { usePosts } from "../../hooks/posts";
@@ -7,22 +8,15 @@ import { usePosts } from "../../hooks/posts";
 const TimeLine = () => {
   const { data, isLoading } = usePosts();
   const posts = data || [];
-
   const reversedPosts = reverseArray(posts);
 
   return (
-    <div>
+    <div className={styles.container}>
       {isLoading ? (
         <Loader />
       ) : (
         reversedPosts.map((post: Post) => (
-          <div>
-            <p>{post.content}</p>
-            <p>{post.date}</p>
-            <p>
-              {post.first_name} {post.last_name}
-            </p>
-          </div>
+          <PostCard post={post} key={post.date} />
         ))
       )}
     </div>
