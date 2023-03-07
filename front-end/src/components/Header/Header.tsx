@@ -1,5 +1,6 @@
+import { FEED_PATH, HOME_PATH, REGISTER_PATH } from "../../routes/const";
 import { useLocation, useNavigate } from "react-router-dom";
-import { HOME_PATH, REGISTER_PATH } from "../../routes/const";
+
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import Navbar from "../Navbar/Navbar";
@@ -14,9 +15,6 @@ const Header = () => {
       <Logo onClick={() => navigate(HOME_PATH)} />
       {location.pathname === HOME_PATH ? <Navbar /> : <></>}
       <div className={styles.header__buttons}>
-        <Button variant="secondary" onClick={() => console.log("Yo")}>
-          Contact
-        </Button>
         <Button
           variant="primary"
           onClick={() =>
@@ -25,7 +23,11 @@ const Header = () => {
             )
           }
         >
-          {location.pathname === HOME_PATH ? "SIGN UP" : "LOGIN"}
+          {location.pathname === HOME_PATH
+            ? "SIGN UP"
+            : location.pathname === REGISTER_PATH
+            ? "LOGIN"
+            : "LOG OUT"}
         </Button>
       </div>
     </header>
