@@ -1,6 +1,6 @@
 import Loader from "../Loader/Loader";
 import { Post } from "../../types/posts";
-import PostCard from "../Post/PostCard";
+import PostCard from "../PostCard/PostCard";
 import { reverseArray } from "../../utils/reverseArray";
 import styles from "./Timeline.module.scss";
 import { usePosts } from "../../hooks/posts";
@@ -8,6 +8,7 @@ import { usePosts } from "../../hooks/posts";
 const TimeLine = () => {
   const { data, isLoading } = usePosts();
   const posts = data || [];
+
   const reversedPosts = reverseArray(posts);
 
   return (
