@@ -10,7 +10,7 @@ import styles from "./PostForm.module.scss";
 
 const PostForm = () => {
   const { user } = useContext(UserContext);
-  const { first_name = "", last_name = "" } = user ?? {};
+  const { first_name = "", last_name = "", email = "" } = user ?? {};
   const { mutateAsync: createPost } = useCreatePost();
   const { refetch, isLoading } = usePosts();
   const [isFetching, setIsFetching] = useState(false);
@@ -30,10 +30,11 @@ const PostForm = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Formik
         initialValues={{
           content: "",
+          email: email,
           first_name: first_name,
           last_name: last_name,
           date: "",
