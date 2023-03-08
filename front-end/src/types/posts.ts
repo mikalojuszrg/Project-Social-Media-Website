@@ -4,6 +4,7 @@ export type Post = {
   last_name: string;
   date: string;
   _id: unknown;
+  email: string;
 };
 
 export type NewPost = Omit<Post, "_id">;
