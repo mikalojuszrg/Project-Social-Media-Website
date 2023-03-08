@@ -35,6 +35,7 @@ const PostForm = () => {
         initialValues={{
           content: "",
           email: email,
+          id: new Date().getTime(),
           first_name: first_name,
           last_name: last_name,
           date: "",
