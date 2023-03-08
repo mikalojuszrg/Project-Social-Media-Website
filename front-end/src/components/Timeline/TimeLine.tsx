@@ -17,7 +17,7 @@ const TimeLine = () => {
         <Loader />
       ) : (
         reversedPosts.map((post: Post) => (
-          <PostCard post={post} key={post.date} />
+          <PostCard post={post} key={post._id} />
         ))
       )}
     </div>
