@@ -117,6 +117,48 @@ app.get("/posts", async (req, res) => {
   }
 });
 
+app.delete("/posts/:id", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("social_media")
+      .collection("posts")
+      .deleteOne({ id: parseInt(req.params.id) });
+    await con.close();
+    if (data.deletedCount === 1) {
+      res.status(200).json({ message: "Post deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Post not found" });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: "An error occurred while processing your request",
+      error,
+    });
+  }
+});
+
+app.get("/posts/:id", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("social_media")
+      .collection("posts")
+      .findOne({ id: parseInt(req.params.id) });
+    await con.close();
+    if (data) {
+      res.status(200).json(data);
+    } else {
+      res.status(404).json({ message: "Post not found" });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: "An error occurred while processing your request",
+      error,
+    });
+  }
+});
+
 app.listen(5000, () => {
   console.log("Servers started on port 5000");
 });
