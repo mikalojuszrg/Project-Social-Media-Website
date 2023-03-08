@@ -1,5 +1,5 @@
+import { createPost, deletePost, fetchPost } from "../api/posts";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createPost, fetchPost } from "../api/posts";
 
 const POSTS = "POSTS";
 
@@ -9,4 +9,8 @@ export const useCreatePost = () => {
 
 export const usePosts = () => {
   return useQuery([POSTS], fetchPost);
+};
+
+export const useDeletePost = () => {
+  return useMutation(deletePost);
 };
