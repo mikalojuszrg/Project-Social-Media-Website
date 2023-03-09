@@ -1,5 +1,11 @@
 @use "../../sass/utilities/colorVariables.scss" as color;
 
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -22,5 +28,9 @@
 
   &__logged {
     color: color.$base-color-dark;
+  }
+
+  Button {
+    width: fit-content;
   }
 }
