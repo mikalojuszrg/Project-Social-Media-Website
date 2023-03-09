@@ -1,14 +1,16 @@
-import { Formik, Form } from "formik";
-import { useContext } from "react";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { UserContext } from "../../contexts/UserContext";
-import { useLoginUser } from "../../hooks/user";
-import { FEED_PATH } from "../../routes/const";
+
+import { Form, Formik } from "formik";
+
 import Button from "../Button/Button";
+import { FEED_PATH } from "../../routes/const";
 import FormikInput from "../FormikInput/FormikInput";
+import { UserContext } from "../../contexts/UserContext";
 import styles from "./LoginForm.module.scss";
+import { toast } from "react-hot-toast";
+import { useContext } from "react";
+import { useLoginUser } from "../../hooks/user";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -28,7 +30,7 @@ const LoginForm = () => {
     loginUser(values)
       .then((response) => {
         console.log(response);
-        setUser(response); // Update the user object here
+        setUser(response);
         navigate(FEED_PATH);
         toast.success("Login successful");
       })
