@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 const Feed = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const { first_name, last_name } = user ?? {};
 
   useEffect(() => {
     if (user === null) {
