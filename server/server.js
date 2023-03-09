@@ -77,7 +77,7 @@ app.post("/user/login", async (req, res) => {
     if (await bcrypt.compare(req.body.password, user.password)) {
       res.send(user);
     } else {
-      res.send("Not Allowed");
+      res.status(401).send("Invalid password");
     }
   } catch (error) {
     console.log(error);
