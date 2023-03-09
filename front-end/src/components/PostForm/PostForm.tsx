@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 import { Field, Form, Formik } from "formik";
 import { useContext, useState } from "react";
 import { useCreatePost, usePosts } from "../../hooks/posts";
@@ -7,6 +9,10 @@ import { FormikHelpers } from "formik";
 import { NewPost } from "../../types/posts";
 import { UserContext } from "../../contexts/UserContext";
 import styles from "./PostForm.module.scss";
+
+const validationSchema = Yup.object().shape({
+  content: Yup.string().required("Your post can't be empty. Write something!"),
+});
 
 const PostForm = () => {
   const { user } = useContext(UserContext);
@@ -41,6 +47,7 @@ const PostForm = () => {
           date: "",
         }}
         onSubmit={handleSubmit}
+        validationSchema={validationSchema}
       >
         {() => (
           <Form className={styles.form}>
