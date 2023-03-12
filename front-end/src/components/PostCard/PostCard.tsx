@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useDeletePost, usePosts } from "../../hooks/posts";
 
-import Button from "../Button/Button";
+import { AiOutlineDelete } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import Loader from "../Loader/Loader";
 import { Post } from "../../types/posts";
@@ -44,12 +44,15 @@ const PostCard: React.FC<Props> = ({ post }) => {
             <p className={styles.container__name}>
               {post.first_name} {post.last_name}
             </p>
+            {loggedUserPost && (
+              <AiOutlineDelete
+                className={styles.container__deletebtn}
+                onClick={() => handleDelete(post.id)}
+              />
+            )}
           </div>
           <p className={styles.container__content}>{post.content}</p>
           <p>{formatDate(post.date)}</p>
-          <Button variant="primary" onClick={() => handleDelete(post.id)}>
-            Delete
-          </Button>
         </div>
       )}
     </div>
