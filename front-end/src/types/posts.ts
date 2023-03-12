@@ -6,6 +6,7 @@ export type Post = {
   _id: string;
   email: string;
   id: number;
+  image: any;
 };
 
 export type NewPost = Omit<Post, "_id">;
