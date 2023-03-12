@@ -1,3 +1,5 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,4 +7,9 @@
   gap: 1rem;
   width: 80%;
   height: 100%;
+  margin-bottom: 3rem;
+
+  @include medium {
+    width: 100%;
+  }
 }

@@ -1,5 +1,8 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .container {
   width: 70%;
+  margin-top: 3rem;
   display: flex;
 }
 
@@ -17,6 +20,10 @@
     border-radius: 1rem;
     padding: 1rem;
     resize: none;
+
+    @include medium {
+      width: 100%;
+    }
   }
 
   Button {
