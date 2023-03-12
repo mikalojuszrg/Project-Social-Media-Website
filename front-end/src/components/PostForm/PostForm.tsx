@@ -39,15 +39,15 @@ const PostForm = () => {
     setIsFetching(false);
   };
 
-  const handleImageChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: any) => void
-  ) => {
-    const file = event.currentTarget.files?.[0];
-    if (file) {
-      setFieldValue("image", file);
-    }
-  };
+  // const handleImageChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  //   setFieldValue: (field: string, value: any) => void
+  // ) => {
+  //   const file = event.currentTarget.files?.[0];
+  //   if (file) {
+  //     setFieldValue("image", file);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -60,7 +60,7 @@ const PostForm = () => {
             first_name: first_name,
             last_name: last_name,
             date: "",
-            image: null,
+            // image: null,
           } as NewPost
         }
         onSubmit={handleSubmit}
@@ -74,13 +74,13 @@ const PostForm = () => {
               placeholder="Share what's new in your life!"
               component="textarea"
             />
-            <input
+            {/* <input
               id="image"
               name="image"
               type="file"
               accept="image/*"
               onChange={(event) => handleImageChange(event, setFieldValue)}
-            />
+            /> */}
             <Button
               variant="primary"
               type="submit"
