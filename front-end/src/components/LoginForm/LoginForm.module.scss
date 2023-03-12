@@ -1,3 +1,28 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .form {
   width: 50%;
+
+  @include medium {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 4rem;
+  }
+
+  &__inputs {
+    @include medium {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+
+      Button {
+        margin: 0 auto;
+      }
+    }
+
+    @include small {
+      width: 100%;
+    }
+  }
 }

@@ -48,7 +48,7 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
       >
         {() => (
-          <Form>
+          <Form className={styles.form__inputs}>
             <FormikInput type="email" name="email" placeholder="Email" />
             <FormikInput
               type="password"
