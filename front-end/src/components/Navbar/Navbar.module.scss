@@ -1,4 +1,10 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .nav {
+  @include medium {
+    display: none;
+  }
+
   &__list {
     display: flex;
     list-style: none;

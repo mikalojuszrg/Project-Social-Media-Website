@@ -1,7 +1,14 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include small {
+    flex-direction: column;
+    gap: 5rem;
+  }
 
   &__buttons {
     display: flex;

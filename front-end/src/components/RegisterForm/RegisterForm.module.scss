@@ -1,7 +1,15 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .form {
   margin: 0 auto;
   width: 30%;
   margin-top: 10rem;
+  margin-bottom: 3rem;
+
+  @include medium {
+    width: 80%;
+    margin-top: 3rem;
+  }
 
   Button {
     margin: 0 auto;
